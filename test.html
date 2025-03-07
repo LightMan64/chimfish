@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<style>
+    button {
+        display:inline-block;
+        height:50px;
+        width:50px;
+        vertical-align:top;
+    }
+    input {
+        display:inline-block;
+        height:50px;
+        vertical-align:top;
+    }
+</style>
+<body>
+    <button id="test", onclick="test()">Start test</button><br>
+</body>
+<script>
+    let questions = ["colour", "stardew fish", "2d shape", "country flag", "star", "constellation", "star group", "stardew fishing rod enchantment", "american state", "sport", "of the 12 olympians?", "book", "3d shape", "scent", "person in the group", "eternian guild", "drink", "animal", "shark", "stardew crop: ancient fruit or starfruit", "chord on guitar", "word", "taylor swift song", "taylor swift album"];
+    let returnvalue = ""
+    function test() {
+        document.getElementById("test").remove();
+        retest()
+    }
+    function retest() {
+        i = Math.floor(Math.random()*questions.length)
+        ask = document.createElement("p");
+        ask.id = "ask";
+        ask.appendChild(document.createTextNode("What is auouau's favourite " + questions[i] + "?"))
+        document.body.appendChild(ask);
+        answer = document.createElement("input");
+        answer.id = "answer";
+        document.body.appendChild(answer);
+        submit = document.createElement("button");
+        submit.id = "submit";
+        submit.onclick = function() {reply()}
+        submit.appendChild(document.createTextNode("Submit"));
+        document.body.appendChild(submit);
+        questions.splice(i, 1);
+        returnvalue = returnvalue + i + "|"
+    }
+    function reply() {
+        returnvalue = returnvalue + btoa(document.getElementById("answer").value) + "|"
+        document.getElementById("ask").remove();
+        document.getElementById("answer").remove();
+        document.getElementById("submit").remove();
+        if(questions.length > 10) {
+            retest()
+        } else {
+            document.body.appendChild(document.createTextNode(returnvalue))
+        }
+    }
+</script>
